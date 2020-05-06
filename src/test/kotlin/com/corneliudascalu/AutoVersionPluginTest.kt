@@ -1,11 +1,8 @@
 package com.corneliudascalu
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
-import org.assertj.core.data.Offset
+import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
-import org.junit.Assert.*
 import org.junit.Test
 
 class AutoVersionPluginTest {
@@ -20,5 +17,16 @@ class AutoVersionPluginTest {
         project.pluginManager.apply("com.corneliudascalu.autoversion")
 
         assertThat(project.plugins.findPlugin(AutoVersionPlugin::class.java)).isNotNull
+    }
+
+    @Test
+    fun testExtension() {
+        val project = ProjectBuilder.builder().build()
+        project.pluginManager.apply("com.corneliudascalu.autoversion")
+
+        val versionName:VersionExtension = project.extensions.getByName("versionName") as VersionExtension
+
+        assertThat(versionName).isNotNull
+        assertThat(versionName.name).isEqualToIgnoringCase("test")
     }
 }
