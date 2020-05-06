@@ -1,5 +1,6 @@
 package com.corneliudascalu
 
+import com.lordcodes.turtle.shellRun
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
@@ -24,9 +25,11 @@ class AutoVersionPluginTest {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.corneliudascalu.autoversion")
 
-        val versionName:VersionExtension = project.extensions.getByName("versionName") as VersionExtension
+        val versionName: VersionExtension = project.extensions.getByName("versionName") as VersionExtension
+
+        val version = shellRun("git", listOf("describe", "--tags"))
 
         assertThat(versionName).isNotNull
-        assertThat(versionName.name).isEqualToIgnoringCase("test")
+        assertThat(versionName.name).isEqualToIgnoringCase(version)
     }
 }
