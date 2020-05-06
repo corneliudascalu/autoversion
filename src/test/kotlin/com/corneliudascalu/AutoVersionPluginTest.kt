@@ -28,8 +28,11 @@ class AutoVersionPluginTest {
         val versionName: VersionExtension = project.extensions.getByName("versionName") as VersionExtension
 
         val version = shellRun("git", listOf("describe", "--tags", "--dirty"))
+        val tokens = version.split("-")
+        val commitHash = tokens[2].removePrefix("g")
+        val cleanVersion = "${tokens[0]}.${tokens[1]}-$commitHash"
 
         assertThat(versionName).isNotNull
-        assertThat(versionName.name).isEqualToIgnoringCase(version)
+        assertThat(versionName.name).isEqualToIgnoringCase(cleanVersion)
     }
 }
