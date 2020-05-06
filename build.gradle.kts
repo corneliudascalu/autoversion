@@ -8,6 +8,9 @@ repositories {
     jcenter()
 }
 
+group = "com.corneliudascalu"
+version = "0.1"
+
 gradlePlugin {
     plugins {
         create("autoversion") {
