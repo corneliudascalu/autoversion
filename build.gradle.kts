@@ -17,5 +17,8 @@ gradlePlugin {
 }
 
 dependencies {
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.1")
+    implementation(kotlin("stdlib", "1.3.72"))
+
+    testImplementation("junit:junit:4.13")
+    testImplementation("org.assertj:assertj-core:3.11.1")
 }
