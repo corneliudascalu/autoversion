@@ -27,7 +27,7 @@ class AutoVersionPluginTest {
 
         val versionName: VersionExtension = project.extensions.getByName("versionName") as VersionExtension
 
-        val version = shellRun("git", listOf("describe", "--tags"))
+        val version = shellRun("git", listOf("describe", "--tags", "--dirty"))
 
         assertThat(versionName).isNotNull
         assertThat(versionName.name).isEqualToIgnoringCase(version)

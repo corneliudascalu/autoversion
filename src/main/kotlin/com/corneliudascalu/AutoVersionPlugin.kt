@@ -1,6 +1,5 @@
 package com.corneliudascalu
 
-import com.lordcodes.turtle.shellRun
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -11,15 +10,16 @@ class AutoVersionPlugin : Plugin<Project> {
         target.extensions.create(
                 EXTENSION_NAME,
                 VersionExtension::class.java)
-        Thread.sleep(1000)
 
-        val output = shellRun("git", listOf("describe", "--tags"))
+        val autoVersion = AutoVersion()
 
         val versionExtension = target.extensions.getByType(VersionExtension::class.java) as VersionExtension
-        versionExtension.name = output
+        versionExtension.name = autoVersion.versionName
+        versionExtension.code = autoVersion.versionCode
     }
 }
 
 open class VersionExtension {
     var name: String = ""
+    var code: Int = 0
 }

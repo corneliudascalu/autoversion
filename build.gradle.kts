@@ -18,8 +18,8 @@ gradlePlugin {
 
 dependencies {
     implementation(kotlin("stdlib", "1.3.72"))
-    implementation("com.lordcodes.turtle:turtle:0.2.0")
 
+    testImplementation("com.lordcodes.turtle:turtle:0.2.0")
     testImplementation("junit:junit:4.13")
     testImplementation("org.assertj:assertj-core:3.11.1")
 }
