@@ -25,3 +25,7 @@ open class VersionExtension {
     var nameHyphenated: String = ""
     var code: Int = 0
 }
+
+fun Project.autoversion(): VersionExtension {
+    return this.extensions.getByName(EXTENSION_NAME) as VersionExtension
+}
