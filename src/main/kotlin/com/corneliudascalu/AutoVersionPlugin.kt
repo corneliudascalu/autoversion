@@ -15,11 +15,13 @@ class AutoVersionPlugin : Plugin<Project> {
 
         val versionExtension = target.extensions.getByType(VersionExtension::class.java) as VersionExtension
         versionExtension.name = autoVersion.versionName
+        versionExtension.nameHyphenated = autoVersion.versionNameHyphen
         versionExtension.code = autoVersion.versionCode
     }
 }
 
 open class VersionExtension {
     var name: String = ""
+    var nameHyphenated: String = ""
     var code: Int = 0
 }

@@ -31,8 +31,10 @@ class AutoVersionPluginTest {
         val tokens = version.split("-")
         val commitHash = tokens[2].removePrefix("g")
         val cleanVersion = "${tokens[0]}.${tokens[1]}-$commitHash"
+        val hyphenVersion = "${tokens[0]}-${tokens[1]}-$commitHash"
 
         assertThat(versionName).isNotNull
         assertThat(versionName.name).isEqualToIgnoringCase(cleanVersion)
+        assertThat(versionName.nameHyphenated).isEqualToIgnoringCase(hyphenVersion)
     }
 }

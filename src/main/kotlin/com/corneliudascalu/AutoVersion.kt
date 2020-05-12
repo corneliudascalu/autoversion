@@ -10,6 +10,9 @@ class AutoVersion {
     val versionName: String
         get() = getBuildVersion()
 
+    val versionNameHyphen: String
+        get() = getHyphenatedBuildVersion()
+
     private fun getCommitCount(): Int {
         val cmd = "git rev-list --count HEAD"
         return cmd.execute().toInt()
@@ -32,7 +35,17 @@ class AutoVersion {
         if (commitCount > 0) {
             return "${version}.${commitCount}-${getCommitHash()}"
         } else {
-            return "$version"
+            return version
+        }
+    }
+
+    private fun getHyphenatedBuildVersion(): String {
+        val version = "git describe --tags --dirty --abbrev=0".execute()
+        val commitCount: Int = getCommitCountSinceTag()
+        if (commitCount > 0) {
+            return "${version}-${commitCount}-${getCommitHash()}"
+        } else {
+            return version
         }
     }
 
