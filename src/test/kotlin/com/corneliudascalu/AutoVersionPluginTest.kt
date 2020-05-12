@@ -25,7 +25,7 @@ class AutoVersionPluginTest {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.corneliudascalu.autoversion")
 
-        val versionName: VersionExtension = project.extensions.getByName("versionName") as VersionExtension
+        val versionName: VersionExtension = project.extensions.getByName("autoversion") as VersionExtension
 
         val version = shellRun("git", listOf("describe", "--tags", "--dirty"))
         val tokens = version.split("-")

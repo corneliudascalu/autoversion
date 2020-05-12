@@ -3,7 +3,7 @@ package com.corneliudascalu
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-private const val EXTENSION_NAME = "versionName"
+private const val EXTENSION_NAME = "autoversion"
 
 class AutoVersionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
