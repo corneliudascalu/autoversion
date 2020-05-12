@@ -23,7 +23,7 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "http://www.corneliudascalu.com"
+    website = "https://github.com/corneliudascalu/autoversion"
     vcsUrl = "https://github.com/corneliudascalu/autoversion"
     tags = listOf("versioning", "git", "tag")
 }
