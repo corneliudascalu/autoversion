@@ -37,4 +37,14 @@ class AutoVersionPluginTest {
         assertThat(versionName.name).isEqualToIgnoringCase(cleanVersion)
         assertThat(versionName.nameHyphenated).isEqualToIgnoringCase(hyphenVersion)
     }
+
+    @Test
+    fun testHelperFunction() {
+        val project = ProjectBuilder.builder().build()
+        project.pluginManager.apply("com.corneliudascalu.autoversion")
+
+        val autoversion = project.autoversion()
+
+        assertThat(autoversion.name).isNotBlank()
+    }
 }
