@@ -1,15 +1,15 @@
 plugins {
     kotlin("jvm") version "1.5.31"
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "0.11.0"
+    id("com.gradle.plugin-publish") version "0.20.0"
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 group = "com.corneliudascalu"
-version = "0.3"
+version = "0.4"
 
 gradlePlugin {
     plugins {
@@ -29,9 +29,9 @@ pluginBundle {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", "1.3.72"))
+    implementation(kotlin("stdlib", "1.5.31"))
 
-    testImplementation("com.lordcodes.turtle:turtle:0.2.0")
+    testImplementation("com.lordcodes.turtle:turtle:0.6.0")
     testImplementation("junit:junit:4.13")
     testImplementation("org.assertj:assertj-core:3.11.1")
 }
