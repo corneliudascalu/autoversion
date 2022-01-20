@@ -25,6 +25,8 @@ class AutoVersion {
 
     private fun getCommitCountSinceTag(): Int {
         val commitDescription = "git describe --tags --long".execute()
+        if (commitDescription.startsWith("fatal"))
+            throw IllegalStateException("No git tags found. Please set at least one tag on the current branch.")
         val pieces = commitDescription.split("-")
         return pieces[pieces.size - 2].toInt()
     }

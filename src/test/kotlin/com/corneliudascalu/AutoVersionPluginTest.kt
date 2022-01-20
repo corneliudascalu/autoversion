@@ -3,13 +3,30 @@ package com.corneliudascalu
 import com.lordcodes.turtle.shellRun
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class AutoVersionPluginTest {
 
+    private var thisCommit = ""
+    private var thisBranch = ""
+
     @Before
     fun setUp() {
+        thisCommit = shellRun("git", listOf("rev-parse", "HEAD"))
+        thisBranch = shellRun("git", listOf("rev-parse", "--abbrev-ref", "HEAD"))
+        shellRun("git", listOf("stash"))
+        shellRun("git", listOf("checkout", "-b", "test-branch"))
+        shellRun("git", listOf("commit", "--allow-empty", "-m \"dummy commit\""))
+    }
+
+    @After
+    fun tearDown() {
+        shellRun("git", listOf("checkout", thisBranch))
+        shellRun("git", listOf("reset", "--hard", thisCommit))
+        shellRun("git", listOf("stash", "pop"))
+        shellRun("git", listOf("br", "-D", "test-branch"))
     }
 
     @Test
@@ -21,7 +38,7 @@ class AutoVersionPluginTest {
     }
 
     @Test
-    fun testExtension() {
+    fun `when there is at least one commit after the most recent tag, it is included in the version name`() {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.corneliudascalu.autoversion")
 
