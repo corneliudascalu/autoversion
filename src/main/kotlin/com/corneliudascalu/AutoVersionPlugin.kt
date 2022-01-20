@@ -8,15 +8,20 @@ private const val EXTENSION_NAME = "autoversion"
 class AutoVersionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.extensions.create(
-                EXTENSION_NAME,
-                VersionExtension::class.java)
+            EXTENSION_NAME,
+            VersionExtension::class.java
+        )
 
         val autoVersion = AutoVersion()
 
         val versionExtension = target.extensions.getByType(VersionExtension::class.java) as VersionExtension
-        versionExtension.name = autoVersion.versionName
-        versionExtension.nameHyphenated = autoVersion.versionNameHyphen
-        versionExtension.code = autoVersion.versionCode
+        try {
+            versionExtension.name = autoVersion.versionName
+            versionExtension.nameHyphenated = autoVersion.versionNameHyphen
+            versionExtension.code = autoVersion.versionCode
+        } catch (e: Exception) {
+            print(e.message)
+        }
     }
 }
 
