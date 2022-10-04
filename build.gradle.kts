@@ -9,7 +9,7 @@ repositories {
 }
 
 group = "com.corneliudascalu"
-version = "0.4"
+version = "0.5"
 
 gradlePlugin {
     plugins {
