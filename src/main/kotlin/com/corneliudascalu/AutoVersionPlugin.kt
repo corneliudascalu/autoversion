@@ -17,6 +17,7 @@ class AutoVersionPlugin : Plugin<Project> {
         val versionExtension = target.extensions.getByType(VersionExtension::class.java) as VersionExtension
         try {
             versionExtension.name = autoVersion.versionName
+            versionExtension.vName = "v${autoVersion.versionName}"
             versionExtension.nameHyphenated = autoVersion.versionNameHyphen
             versionExtension.code = autoVersion.versionCode
             versionExtension.releaseCode = autoVersion.releaseVersionCode
@@ -31,6 +32,11 @@ open class VersionExtension {
      * The version name generated on the most recent tag, using periods (.) to separate the version from commit hash.
      */
     var name: String = "0.0.1"
+
+    /**
+     * The version name generated on the most recent tag, using periods (.) to separate the version from commit hash, prefixed with a "v".
+     */
+    var vName: String = "v0.0.1"
 
     /**
      * The version name generated on the most recent tag, using hyphens (-) to separate the version from commit hash.

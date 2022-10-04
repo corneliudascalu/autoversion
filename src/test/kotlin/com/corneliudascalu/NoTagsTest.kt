@@ -47,6 +47,7 @@ class NoTagsTest {
         val versionName: VersionExtension = project.extensions.getByName("autoversion") as VersionExtension
 
         assertThat(versionName.name).isEqualTo("0.0.1")
+        assertThat(versionName.vName).isEqualTo("v0.0.1")
         assertThat(versionName.code).isEqualTo(1)
         assertThat(versionName.releaseCode).isEqualTo(1)
     }

@@ -52,6 +52,7 @@ class AutoVersionPluginTest {
 
         assertThat(versionName).isNotNull
         assertThat(versionName.name).isEqualToIgnoringCase(cleanVersion)
+        assertThat(versionName.vName).isEqualToIgnoringCase("v$cleanVersion")
         assertThat(versionName.nameHyphenated).isEqualToIgnoringCase(hyphenVersion)
     }
 
