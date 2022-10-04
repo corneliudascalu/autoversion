@@ -19,6 +19,7 @@ class AutoVersionPlugin : Plugin<Project> {
             versionExtension.name = autoVersion.versionName
             versionExtension.nameHyphenated = autoVersion.versionNameHyphen
             versionExtension.code = autoVersion.versionCode
+            versionExtension.releaseCode = autoVersion.releaseVersionCode
         } catch (e: Exception) {
             print(e.message)
         }
@@ -26,9 +27,25 @@ class AutoVersionPlugin : Plugin<Project> {
 }
 
 open class VersionExtension {
-    var name: String = ""
-    var nameHyphenated: String = ""
-    var code: Int = 0
+    /**
+     * The version name generated on the most recent tag, using periods (.) to separate the version from commit hash.
+     */
+    var name: String = "0.0.1"
+
+    /**
+     * The version name generated on the most recent tag, using hyphens (-) to separate the version from commit hash.
+     */
+    var nameHyphenated: String = "0.0.1"
+
+    /**
+     * The version code (the number of commits on the current branch since the beginning of time)
+     */
+    var code: Int = 1
+
+    /**
+     * The version code for the most recent release (the number of commits up to the release tag)
+     */
+    var releaseCode: Int = 1
 }
 
 fun Project.autoversion(): VersionExtension {

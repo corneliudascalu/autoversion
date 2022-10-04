@@ -7,6 +7,9 @@ class AutoVersion {
     val versionCode: Int
         get() = getCommitCount()
 
+    val releaseVersionCode: Int
+        get() = getTagCommitCount()
+
     val versionName: String
         get() = getBuildVersion()
 
@@ -15,6 +18,11 @@ class AutoVersion {
 
     private fun getCommitCount(): Int {
         val cmd = "git rev-list --count HEAD"
+        return cmd.execute().toInt()
+    }
+
+    private fun getTagCommitCount(): Int {
+        val cmd = "git rev-list --count --tags"
         return cmd.execute().toInt()
     }
 

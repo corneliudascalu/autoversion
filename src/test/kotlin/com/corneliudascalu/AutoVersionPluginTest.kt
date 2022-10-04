@@ -56,6 +56,20 @@ class AutoVersionPluginTest {
     }
 
     @Test
+    fun `when there is at least one commit after the most recent tag, it is not counted for the release version code`() {
+        val project = ProjectBuilder.builder().build()
+        project.pluginManager.apply("com.corneliudascalu.autoversion")
+
+        val versionName: VersionExtension = project.extensions.getByName("autoversion") as VersionExtension
+
+        val commitCount = shellRun("git", listOf("rev-list", "--count", "HEAD"))
+        val tagCommitCount = shellRun("git", listOf("rev-list", "--count", "--tags"))
+
+        assertThat(versionName.code).isEqualTo(commitCount.toInt())
+        assertThat(versionName.releaseCode).isEqualTo(tagCommitCount.toInt())
+    }
+
+    @Test
     fun testHelperFunction() {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.corneliudascalu.autoversion")
